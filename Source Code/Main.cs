@@ -20,8 +20,10 @@ using MEC;
 using RemoteAdmin;
 using Exiled.CustomRoles;
 using Exiled.Events.EventArgs.Player;
+using Exiled.Events.EventArgs.Server;
 using PlayerRoles;
 using Respawning;
+using UnityEngine;
 
 namespace Scp273
 {
@@ -43,7 +45,8 @@ namespace Scp273
         {
             plugin = this;
             Exiled.Events.Handlers.Server.RoundStarted += this.RoundStarted;
-            Exiled.Events.Handlers.Player.Died += this.Died;
+            Exiled.Events.Handlers.Player.Died += this.OnDied;
+            Exiled.Events.Handlers.Player.ChangingRole += this.ChangingRole;
             Log.Info("");
             base.OnEnabled();
         }
@@ -63,10 +66,42 @@ namespace Scp273
                 player.AddItem(ItemType.Painkillers);
                 player.AddItem(ItemType.Coin);
                 player.ShowHint(Config.Hint1, 5f);
-                });
+              });
+        }
+
+        public void ChangingRole(ChangingRoleEventArgs ev)
+        {
+            if (ev.Player.Role.Type == RoleTypeId.NtfCaptain)
+            {
+                ev.Player.CustomInfo = "Человек";
+            }
+            if (ev.Player.Role.Type == RoleTypeId.NtfSergeant)
+            {
+                ev.Player.CustomInfo = "Человек";
+            }
+            if (ev.Player.Role.Type == RoleTypeId.NtfPrivate)
+            {
+                ev.Player.CustomInfo = "Человек";
+            }
+            if (ev.Player.Role.Type == RoleTypeId.ChaosMarauder)
+            {
+                ev.Player.CustomInfo = "Человек";
+            }
+            if (ev.Player.Role.Type == RoleTypeId.ChaosRepressor)
+            {
+                ev.Player.CustomInfo = "Человек";
+            }
+            if (ev.Player.Role.Type == RoleTypeId.ChaosRifleman)
+            {
+                ev.Player.CustomInfo = "Человек";
+            }
+            if (ev.Player.Role.Type == RoleTypeId.ChaosConscript)
+            {
+                ev.Player.CustomInfo = "Человек";
+            }
         }
         
-        public void Died(DiedEventArgs ev)
+        public void OnDied(DiedEventArgs ev)
         {
             if (ev.Player.CustomInfo == "Человек-Феникс.")
             {
@@ -82,6 +117,5 @@ namespace Scp273
                 });
             }
         }
-
     }
 }
