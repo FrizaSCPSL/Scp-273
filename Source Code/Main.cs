@@ -24,6 +24,7 @@ using Exiled.Events.EventArgs.Server;
 using PlayerRoles;
 using Respawning;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Scp273
 {
@@ -35,10 +36,11 @@ namespace Scp273
 
         public override string Prefix { get; } = "SCP-273";
 
-        public override Version Version { get; } = new Version(1, 0, 0);
+        public override Version Version { get; } = new Version(1, 0, 1);
 
         public override Version RequiredExiledVersion { get; } = new Version(8, 8, 0);
-
+        
+        public Random random = new Random();
         public Plugin plugin;
         public string SCP273ID = "";
         public override void OnEnabled()
@@ -47,26 +49,33 @@ namespace Scp273
             Exiled.Events.Handlers.Server.RoundStarted += this.RoundStarted;
             Exiled.Events.Handlers.Player.Died += this.OnDied;
             Exiled.Events.Handlers.Player.ChangingRole += this.ChangingRole;
+            Exiled.Events.Handlers.Player.Escaping += this.OnEscaping;
             Log.Info("");
             base.OnEnabled();
         }
         public void RoundStarted()
         {
-            Timing.CallDelayed(2f, () =>
-            {
-                SCP273ID = Player.Get(PlayerRoles.RoleTypeId.ClassD).ToList().RandomItem().UserId;
-            });
-              Timing.CallDelayed(2f, () => {
-                var player = Player.Get(SCP273ID);
-                player.CustomInfo = "Человек-Феникс.";
-                player.RankColor = "orange";
-                player.RankName = "Scp-273";
-                player.MaxHealth = 170;
-                player.Health = 170;
-                player.AddItem(ItemType.Painkillers);
-                player.AddItem(ItemType.Coin);
-                player.ShowHint(Config.Hint1, 5f);
-              });
+              
+              int rand = random.Next(1, 100);
+
+              if (rand < Config.spawnChance)
+              {
+                  Timing.CallDelayed(2f, () =>
+                  {
+                      SCP273ID = Player.Get(PlayerRoles.RoleTypeId.ClassD).ToList().RandomItem().UserId;
+                  });
+                  Timing.CallDelayed(2f, () => {
+                      var player = Player.Get(SCP273ID);
+                      player.CustomInfo = "Человек-Феникс.";
+                      player.RankColor = "orange";
+                      player.RankName = "Scp-273";
+                      player.MaxHealth = 170;
+                      player.Health = 170;
+                      player.AddItem(ItemType.Painkillers);
+                      player.AddItem(ItemType.Coin);
+                      player.ShowHint(Config.Hint1, 5f);
+                  });
+              }
         }
 
         public void ChangingRole(ChangingRoleEventArgs ev)
@@ -98,6 +107,14 @@ namespace Scp273
             if (ev.Player.Role.Type == RoleTypeId.ChaosConscript)
             {
                 ev.Player.CustomInfo = "Человек";
+            } 
+        }
+
+        public void OnEscaping(EscapingEventArgs ev)
+        {
+            if (ev.Player.CustomInfo == "Человек-Феникс.")
+            {
+                ev.Player.CustomInfo = "Человек.";
             }
         }
         
