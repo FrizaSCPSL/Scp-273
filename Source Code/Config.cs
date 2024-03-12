@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Exiled.API.Interfaces;
+using PlayerRoles;
 
 namespace Scp273
 {
@@ -18,6 +19,8 @@ namespace Scp273
         public string Prefix { get; set; } = "Scp-273";
         
         public string Cinfo { get; set; } = "Человек-Феникс.";
+        
+        public int spawnChance { get; set; } = 5;
         
     }
 }
