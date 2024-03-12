@@ -75,6 +75,8 @@ namespace Scp273.Commands
                 player.ShowHint("SCP-273 - человек-феникс. При смерти вы возраждаетесь спустя 20 секунд.", 5f);
                 player.MaxHealth = 170;
                 player.Health = 170;
+                Cassie.Message("<split>Внимание! <size=0> pitch_0.97 . . . Attention </size><split>Условия содержания SCP-273 нарушены... <size=0> . SCP 2 7 3 has been contained is error </size>");
+                Cassie.MessageTranslated(String.Empty,"<split>Внимание! <size=0> pitch_0.97 . . . Attention </size><split>Условия содержания SСP-273 нарушены... <size=0> . SCP 2 7 3 has been contained is error</size>");
                 
                 response = "Вы стали Scp273";
                 return true;
