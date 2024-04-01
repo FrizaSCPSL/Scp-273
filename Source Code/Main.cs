@@ -49,7 +49,6 @@ namespace Scp273
             plugin = this;
             Exiled.Events.Handlers.Server.RoundStarted += this.RoundStarted;
             Exiled.Events.Handlers.Player.Died += this.OnDied;
-            Exiled.Events.Handlers.Player.ChangingRole += this.ChangingRole;
             Exiled.Events.Handlers.Player.Escaping += this.OnEscaping;
             Exiled.Events.Handlers.Player.TogglingNoClip += this.NoClip;
             Exiled.Events.Handlers.Player.FlippingCoin += this.OnFlippingCoin;
@@ -83,37 +82,6 @@ namespace Scp273
               }
         }
 
-        public void ChangingRole(ChangingRoleEventArgs ev)
-        {
-            if (ev.Player.Role.Type == RoleTypeId.NtfCaptain)
-            {
-                ev.Player.CustomInfo = null;
-            }
-            if (ev.Player.Role.Type == RoleTypeId.NtfSergeant)
-            {
-                ev.Player.CustomInfo = null;
-            }
-            if (ev.Player.Role.Type == RoleTypeId.NtfPrivate)
-            {
-                ev.Player.CustomInfo = null;
-            }
-            if (ev.Player.Role.Type == RoleTypeId.ChaosMarauder)
-            {
-                ev.Player.CustomInfo = null;
-            }
-            if (ev.Player.Role.Type == RoleTypeId.ChaosRepressor)
-            {
-                ev.Player.CustomInfo = null;
-            }
-            if (ev.Player.Role.Type == RoleTypeId.ChaosRifleman)
-            {
-                ev.Player.CustomInfo = null;
-            }
-            if (ev.Player.Role.Type == RoleTypeId.ChaosConscript)
-            {
-                ev.Player.CustomInfo = null;
-            } 
-        }
 
         public void OnEscaping(EscapingEventArgs ev)
         {
