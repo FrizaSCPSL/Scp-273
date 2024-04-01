@@ -87,7 +87,19 @@ namespace Scp273
         {
             if (ev.Player.CustomInfo == "Человек-Феникс.")
             {
-                ev.Player.CustomInfo = null;
+                ev.Player.CustomInfo = "";
+            }
+            if (ev.Player.CustomInfo == "Человек-Феникс. Жизнь 2")
+            {
+                ev.Player.CustomInfo = "";
+            }
+            if (ev.Player.CustomInfo == "Человек-Феникс. Жизнь 3")
+            {
+                ev.Player.CustomInfo = "";
+            }
+            if (ev.Player.CustomInfo == "Человек-Феникс. Жизнь 4")
+            {
+                ev.Player.CustomInfo = "";
             }
         }
         
